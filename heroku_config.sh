@@ -1,6 +1,7 @@
+heroku config:set SECRET_KEY=CMMWh8Be1Qq-i3_LkcGeps9mWIHBowLcTUwKJrxxNy4
 
-heroku config: EMAIL_BACKEND=console
-heroku config: EMAIL_HOST = smtp.sendgrid.net
-heroku config: EMAIL_HOST_USER= apikey
-heroku config: EMAIL_HOST_PASSWORD = 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
-heroku config: DEFAULT_FROM_EMAIL=eduardo_3reynoso@hotmail.com
+heroku config:set EMAIL_BACKEND=smtp
+heroku config:set EMAIL_HOST=smtp.sendgrid.net
+heroku config:set EMAIL_HOST_USER=apikey
+heroku config:set EMAIL_HOST_PASSWORD=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
+heroku config:set DEFAULT_FROM_EMAIL=eduardo_3reynoso@hotmail.com
