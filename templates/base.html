@@ -15,9 +15,9 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">BlogApp</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Issues Manager</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,7 +27,7 @@
                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a> 
                      
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'list' %}">See All Blogs</a>
+                    <a class="nav-link" href="{% url 'list' %}">See All Issues</a>
                 </li>       
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">About</a>
@@ -39,10 +39,10 @@
                       {{user.username}}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'create' %}">Create Post</a></li>
-                        <li><a class="dropdown-item" href="{% url 'draft_list' %}">Drafts</a></li>
-                        <li><a class="dropdown-item" href="{% url 'published_list' %}">Published</a></li>
-                        <li><a class="dropdown-item" href="{% url 'archived_list' %}">Archived</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create' %}">Post new issue</a></li>
+                        <li><a class="dropdown-item" href="{% url 'todo_list' %}">To do</a></li>
+                        <li><a class="dropdown-item" href="{% url 'inprogress_list' %}">In progress</a></li>
+                        <li><a class="dropdown-item" href="{% url 'done_list' %}">Done</a></li>
                         <li><hr class="dropdown-item-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
                         {% if user.is_staff %}

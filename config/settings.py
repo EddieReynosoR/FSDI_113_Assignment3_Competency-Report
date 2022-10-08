@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     # Apps:
     'accounts',
     'pages',
-    'posts',  
+    'issues',  
 
     
 ]

@@ -5,11 +5,11 @@ from django.db import migrations
 
 def populate_status(apps, schemaeditor):
     entries = {
-        "published": "A post that appears on the site (to all users).",
-        "draft": "A post that is being workrd on, or not ready to be viewed.",
-        "archived": "A post that no longer appears on the site."
+        "To do": "An issue that is has to be solve.",
+        "In progress": "An issue that is currently being solved.",
+        "Done": "An issue that is already solved."
     }
-    Status = apps.get_model("posts", "Satus")
+    Status = apps.get_model("issues", "Status")
     for name, desc in entries.items():
         status_obj = Status(name=name, description=desc)
         status_obj.save()
@@ -18,7 +18,7 @@ def populate_status(apps, schemaeditor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0002_satus'),
+        ('issues', '0002_status'),
     ]
 
     operations = [migrations.RunPython(populate_status)]

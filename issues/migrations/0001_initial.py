@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Post",
+            name="Issues",
             fields=[
                 (
                     "id",
@@ -27,11 +27,17 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("title", models.CharField(max_length=256)),
-                ("subtitle", models.CharField(max_length=256)),
-                ("body", models.TextField()),
-                ("created_on", models.DateTimeField(auto_now_add=True)),
+                ("summary", models.CharField(max_length=512)),
+                ("description", models.TextField()),          
                 (
-                    "author",
+                    "requester",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "assignee",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         to=settings.AUTH_USER_MODEL,
