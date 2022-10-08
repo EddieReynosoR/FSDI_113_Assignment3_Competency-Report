@@ -1,4 +1,4 @@
-heroku config:set SECRET_KEY=CMMWh8Be1Qq-i3_LkcGeps9mWIHBowLcTUwKJrxxNy4
+heroku config:set SECRET_KEY=whatever
 
 heroku config:set EMAIL_BACKEND=smtp
 heroku config:set EMAIL_HOST=smtp.sendgrid.net
