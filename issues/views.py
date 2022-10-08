@@ -19,7 +19,7 @@ class ToDoIssueListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pending_status = Status.objects.get(name="to do")
+        pending_status = Status.objects.get(name="To do")
         context["issues_list"] = Issues.objects.filter(
             requester=self.request.user).filter(status=pending_status).reverse()
         return context
@@ -31,7 +31,7 @@ class InProgressIssueListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pending_status = Status.objects.get(name="in progress")
+        pending_status = Status.objects.get(name="In progress")
         context["issues_list"] = Issues.objects.filter(
             requester=self.request.user).filter(status=pending_status).reverse()
         return context
@@ -41,9 +41,12 @@ class DoneIssueListView(ListView):
     template_name = "issues/list.html"
     model = Issues
 
+    def test_func(self):
+        return self.request.user.role.name in ["Agent", "Manager"]
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pending_status = Status.objects.get(name="done")
+        pending_status = Status.objects.get(name="Done")
         context["issues_list"] = Issues.objects.filter(
             requester=self.request.user).filter(status=pending_status).reverse()
         return context
