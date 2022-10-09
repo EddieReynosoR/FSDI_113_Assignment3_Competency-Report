@@ -20,8 +20,7 @@ class ToDoIssueListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pending_status = Status.objects.get(name="To do")
-        context["issues_list"] = Issues.objects.filter(
-            requester=self.request.user).filter(status=pending_status).reverse()
+        context["issues_list"] = Issues.objects.filter(status=pending_status).reverse()
         return context
 
 
@@ -32,8 +31,7 @@ class InProgressIssueListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pending_status = Status.objects.get(name="In progress")
-        context["issues_list"] = Issues.objects.filter(
-            requester=self.request.user).filter(status=pending_status).reverse()
+        context["issues_list"] = Issues.objects.filter(status=pending_status).reverse()
         return context
 
 
@@ -47,8 +45,7 @@ class DoneIssueListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pending_status = Status.objects.get(name="Done")
-        context["issues_list"] = Issues.objects.filter(
-            requester=self.request.user).filter(status=pending_status).reverse()
+        context["issues_list"] = Issues.objects.filter(status=pending_status).reverse()
         return context
 
 
@@ -60,7 +57,8 @@ class IssueDetailView(DetailView):
 class IssueCreateView(LoginRequiredMixin, CreateView):
     template_name = "issues/create.html"
     model = Issues
-    fields = ["title", "summary", "description", "status", "assignee"]
+    fields = ["title", "summary", "description"]
+    exclude = ["status", "assignee"]
 
     def form_valid(self, form):
         form.instance.requester = self.request.user
@@ -70,11 +68,11 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
 class IssueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "issues/edit.html"
     model = Issues
-    fields = ["title", "summary", "status", "description"]
+    fields = ["title", "summary", "status", "description", "assignee"]
 
     def test_func(self):
-        post_obj = self.get_object()
-        return post_obj.requester == self.request.user
+        # post_obj = self.get_object()
+        return self.request.user.role.name in ["Agent", "Manager"]
 
 
 class IssueDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -83,5 +81,5 @@ class IssueDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy("list")
 
     def test_func(self):
-        post_obj = self.get_object()
-        return post_obj.requester == self.request.user
+        # post_obj = self.get_object()
+        return self.request.user.role.name in ["Agent", "Manager"]

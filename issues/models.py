@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -20,7 +21,8 @@ class Issues(models.Model):
     description = models.TextField()
     status = models.ForeignKey(
         Status,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        default = 1
     )
     requester = models.ForeignKey(
         get_user_model(),
@@ -31,7 +33,8 @@ class Issues(models.Model):
         get_user_model(),
         on_delete=models.CASCADE, 
         blank=True, null=True,  
-        related_name = "assignee"
+        related_name = "assignee",
+        default = 1
     )
     
     
